@@ -19,12 +19,12 @@ class Bird(Obstacle):
         self.step_index = 0
 
     def update(self, game_speed, obstacles):
-        self.rect.x -= game_speed
+        self.rect.x -= game_speed * 1.2
         if self.rect.x < -self.rect.width:
             obstacles.pop()
 
-        if self.step_index >= 6:
+        if self.step_index >= 8:
             self.step_index = 0
 
-        self.type = 0 if self.step_index < 3 else 1
+        self.type = 0 if self.step_index < 4 else 1
         self.step_index += 1
