@@ -1,7 +1,7 @@
 import pygame
 import random 
 
-from dino_runner.components.obstacles.cactus import Cactus, LargeCactus
+from dino_runner.components.obstacles.cactus import Cactus
 from dino_runner.components.obstacles.bird import Bird
 from dino_runner.utils.constants import SMALL_CACTUS, LARGE_CACTUS, BIRD
 
@@ -16,7 +16,7 @@ class ObstacleManager:
             if obstacle_type == SMALL_CACTUS:
                 self.obstacles.append(Cactus(SMALL_CACTUS))
             elif obstacle_type == LARGE_CACTUS:
-                self.obstacles.append(LargeCactus(LARGE_CACTUS))
+                self.obstacles.append(Cactus(LARGE_CACTUS))
             elif obstacle_type == BIRD:
                 self.obstacles.append(Bird()) 
 
