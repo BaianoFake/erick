@@ -76,8 +76,8 @@ class Game:
     def update_score(self):
         self.score += 1
         if self.score % 10 == 0:
-            self.game_speed += 0.2
-        if self.game_speed > 20.2:
+            self.game_speed += 0.1
+        if self.game_speed > 20:
             self.max_game_speed = self.game_speed
 
 
@@ -102,7 +102,7 @@ class Game:
 
     def draw_score(self):
         self.create_text(f"Score: {self.score}", 22, (1000, 50), (0, 0, 0))
-        self.create_text(f"Game Speed: {self.max_game_speed:.1f}", 22, (1000, 70), (0, 0, 0))
+        self.create_text(f"Game Speed: {self.game_speed:.1f}", 22, (1000, 70), (0, 0, 0))
 
     def handle_events_on_menu(self):
         for event in pygame.event.get():
