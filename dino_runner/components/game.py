@@ -51,6 +51,7 @@ class Game:
         # Game loop: events - update - draw
         self.playing = True
         while self.playing:
+            self.power_up_manager.update(self)
             self.events()
             self.update()
             self.draw()
@@ -70,7 +71,6 @@ class Game:
         self.player.update(user_input)
         self.obstacle_manager.update(self)
         self.update_score()
-        self.power_up_manager.update(self)
 
     def create_text(self, message, font_size, position, color):
         font = pygame.font.Font(FONT_STYLE, font_size)
@@ -90,7 +90,11 @@ class Game:
 
     def draw(self):
         self.clock.tick(FPS)
-        self.screen.fill((255, 255, 255)) # "#FFFFFF"
+        if self.player.type == TIME_TYPE:
+            self.screen.fill((0, 0, 0))  # Preenche com a cor preta
+        else:
+            self.screen.fill((255, 255, 255))  # Preenche com a cor branca
+
         self.draw_background()
         self.player.draw(self.screen)
         self.obstacle_manager.draw(self.screen)
@@ -110,14 +114,14 @@ class Game:
         self.x_pos_bg -= self.game_speed
 
     def draw_score(self):
-        self.create_text(f"Score: {self.score}", 22, (1000, 50), (0, 0, 0))
-        self.create_text(f"Game Speed: {self.game_speed:.1f}", 22, (1000, 70), (0, 0, 0))
+        self.create_text(f"Score: {self.score}", 22, (1000, 50), (128, 128, 128))
+        self.create_text(f"Game Speed: {self.game_speed:.1f}", 22, (1000, 70), (128, 128, 128))
 
     def draw_power_up_time(self):
         if self.player.has_power_up:
             time_to_show = round((self.player.power_up_time - pygame.time.get_ticks()) / 1000, 2)
             if time_to_show >= 0:
-               self.create_text(f"{self.player.type.capitalize()} enabled for {time_to_show} seconds", 18, (500, 40), (0, 0, 0))
+               self.create_text(f"{self.player.type.capitalize()} enabled for {time_to_show} seconds", 18, (500, 40), (128, 128, 128))
             else:
                 self.player.has_power_up = False
                 self.player.type = DEFAULT_TYPE
