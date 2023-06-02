@@ -27,6 +27,7 @@ class PowerUpManager:
                 game.player.type = power_up.type
                 game.player.power_up_time = power_up.start_time + (power_up.duration * 1000)
                 self.power_ups.remove(power_up)
+                game.game_speed = game.max_game_speed
 
     def draw(self, screen):
         for power_up in self.power_ups:
