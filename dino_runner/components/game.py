@@ -83,8 +83,10 @@ class Game:
         self.score += 1
         if self.score % 10 == 0:
             self.game_speed += 0.1
-        if self.game_speed > 20:
+        if self.game_speed > 21:
             self.max_game_speed = self.game_speed
+        if self.player.type == TIME_TYPE:
+            self.game_speed = 20
 
     def draw(self):
         self.clock.tick(FPS)
