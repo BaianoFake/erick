@@ -1,8 +1,9 @@
 import pygame
 
-from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS
+from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, DEFAULT_TYPE, TIME_TYPE, SHIELD_TYPE
 from dino_runner.components.dinosaur import Dinosaur
 from dino_runner.components.obstacles.obstacle_manager import ObstacleManager
+from dino_runner.components.power_ups.power_up_manager import PowerUpManager
 
 FONT_STYLE = "freesansbold.ttf"
 
@@ -14,6 +15,7 @@ class Game:
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         self.clock = pygame.time.Clock()
         self.playing = False
+        self.running = False
         self.game_speed = 20
         self.max_game_speed = 20
         self.x_pos_bg = 0
@@ -24,7 +26,8 @@ class Game:
         self.death_count = 0
 
         self.player = Dinosaur()
-        self.obstacle_manager = ObstacleManager()       
+        self.obstacle_manager = ObstacleManager()   
+        self.power_up_manager = PowerUpManager()     
 
     def execute(self):
         self.running = True
@@ -65,6 +68,7 @@ class Game:
         self.player.update(user_input)
         self.obstacle_manager.update(self)
         self.update_score()
+        self.power_up_manager.update(self)
 
     def create_text(self, message, font_size, position, color):
         font = pygame.font.Font(FONT_STYLE, font_size)
@@ -80,7 +84,6 @@ class Game:
         if self.game_speed > 20:
             self.max_game_speed = self.game_speed
 
-
     def draw(self):
         self.clock.tick(FPS)
         self.screen.fill((255, 255, 255)) # "#FFFFFF"
@@ -88,6 +91,8 @@ class Game:
         self.player.draw(self.screen)
         self.obstacle_manager.draw(self.screen)
         self.draw_score()
+        self.draw_power_up_time()
+        self.power_up_manager.draw(self.screen)
         pygame.display.update()
         pygame.display.flip()
 
@@ -103,6 +108,16 @@ class Game:
     def draw_score(self):
         self.create_text(f"Score: {self.score}", 22, (1000, 50), (0, 0, 0))
         self.create_text(f"Game Speed: {self.game_speed:.1f}", 22, (1000, 70), (0, 0, 0))
+
+    def draw_power_up_time(self):
+        if self.player.has_power_up:
+            time_to_show = round((self.player.power_up_time - pygame.time.get_ticks()) / 1000, 2)
+            if time_to_show >= 0:
+               self.create_text(f"{self.player.type.capitalize()} enabled for {time_to_show} seconds", 18, (500, 40), (0, 0, 0))
+            else:
+                self.player.has_power_up = False
+                self.player.type = DEFAULT_TYPE
+                self.game_speed = self.max_game_speed
 
     def handle_events_on_menu(self):
         for event in pygame.event.get():
