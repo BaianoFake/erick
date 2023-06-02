@@ -44,6 +44,8 @@ class Game:
         self.score = 0
         self.player = Dinosaur()
         self.obstacle_manager.reset_obstacles()
+        self.power_up_manager.reset_power_ups()
+
 
     def run(self):
         # Game loop: events - update - draw
