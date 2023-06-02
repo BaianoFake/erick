@@ -10,6 +10,18 @@ def jump_audio():
     audio = pygame.mixer.Sound(os.path.join(AUD_DIR, "audio/jump.mp3"))
     audio.play()
 
+def fraco_audio():
+    audio = pygame.mixer.Sound(os.path.join(AUD_DIR, "audio/fraco.mp3"))
+    audio.play()
+
+def hammer_audio():
+    audio = pygame.mixer.Sound(os.path.join(AUD_DIR, "audio/marreta.mp3"))
+    audio.play()
+
+def time_audio():
+    audio = pygame.mixer.Sound(os.path.join(AUD_DIR, "audio/tempo.mp3"))
+    audio.play()
+
 def score_reach_audio():
     audio = pygame.mixer.Sound(os.path.join(AUD_DIR, "audio/score.mp3"))
     audio.play()

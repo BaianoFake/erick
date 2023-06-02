@@ -1,6 +1,8 @@
 import random
 import pygame
 
+from dino_runner.components.audio import fraco_audio, hammer_audio, time_audio
+from dino_runner.utils.constants import TIME_TYPE, HAMMER_TYPE, SHIELD_TYPE
 from dino_runner.components.power_ups.shield import Shield
 from dino_runner.components.power_ups.time import Time
 from dino_runner.components.power_ups.hammer import Hammer
@@ -28,6 +30,13 @@ class PowerUpManager:
                 game.player.power_up_time = power_up.start_time + (power_up.duration * 1000)
                 self.power_ups.remove(power_up)
                 game.game_speed = game.max_game_speed
+                if power_up.type == TIME_TYPE:
+                    time_audio()
+                elif power_up.type == SHIELD_TYPE:
+                    fraco_audio()
+                elif power_up.type == HAMMER_TYPE:
+                    hammer_audio()
+
 
     def draw(self, screen):
         for power_up in self.power_ups:

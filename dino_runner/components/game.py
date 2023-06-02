@@ -146,6 +146,7 @@ class Game:
         half_screen_width = SCREEN_WIDTH // 2
 
         if self.death_count == 0:
+            self.screen.blit(ICON, (half_screen_width - 20, half_screen_height - 140))
             self.create_text("Press any key to start", 22, (half_screen_width, half_screen_height), (0, 0, 0))
         else:
             self.screen.blit(ICON, (half_screen_width - 20, half_screen_height - 140))
