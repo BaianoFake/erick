@@ -1,6 +1,6 @@
 import pygame
 
-from dino_runner.components.audio import loop_music, score_reach_audio, start_audio
+from dino_runner.utils.audio import loop_music, score_reach_audio, start_audio
 from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, DEFAULT_TYPE, TIME_TYPE, SHIELD_TYPE
 from dino_runner.components.dinosaur import Dinosaur
 from dino_runner.components.obstacles.obstacle_manager import ObstacleManager

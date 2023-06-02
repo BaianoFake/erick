@@ -1,7 +1,7 @@
 import random
 import pygame
 
-from dino_runner.components.audio import fraco_audio, hammer_audio, time_audio
+from dino_runner.utils.audio import fraco_audio, hammer_audio, time_audio
 from dino_runner.utils.constants import TIME_TYPE, HAMMER_TYPE, SHIELD_TYPE
 from dino_runner.components.power_ups.shield import Shield
 from dino_runner.components.power_ups.time import Time

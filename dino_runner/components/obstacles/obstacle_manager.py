@@ -1,7 +1,7 @@
 import pygame
 import random 
 
-from dino_runner.components.audio import dead_audio
+from dino_runner.utils.audio import dead_audio
 from dino_runner.components.obstacles.cactus import Cactus
 from dino_runner.components.obstacles.bird import Bird
 from dino_runner.utils.constants import SMALL_CACTUS, LARGE_CACTUS, BIRD

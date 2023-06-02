@@ -1,7 +1,7 @@
 import pygame
 from pygame.sprite import Sprite
 
-from dino_runner.components.audio import jump_audio
+from dino_runner.utils.audio import jump_audio
 from dino_runner.utils.constants import RUNNING, JUMPING, DUCKING, DEFAULT_TYPE, SHIELD_TYPE, HAMMER_TYPE, TIME_TYPE, DUCKING_SHIELD, JUMPING_SHIELD, RUNNING_SHIELD, DUCKING_HAMMER, JUMPING_HAMMER, RUNNING_HAMMER, SCREEN_WIDTH
 
 
