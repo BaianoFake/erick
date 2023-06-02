@@ -1,6 +1,7 @@
 import pygame
 import random 
 
+from dino_runner.components.audio import dead_audio
 from dino_runner.components.obstacles.cactus import Cactus
 from dino_runner.components.obstacles.bird import Bird
 from dino_runner.utils.constants import SMALL_CACTUS, LARGE_CACTUS, BIRD
@@ -24,7 +25,8 @@ class ObstacleManager:
             obstacle.update(game.game_speed, self.obstacles)
             if game.player.dino_rect.colliderect(obstacle.rect):
                 if not game.player.has_power_up or game.player.type == "time":
-                    pygame.time.delay(500)
+                    dead_audio()
+                    pygame.time.delay(1000)
                     game.playing = False
                     game.death_count += 1
                     break

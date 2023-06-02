@@ -1,11 +1,14 @@
 import pygame
 
+from dino_runner.components.audio import loop_music, score_reach_audio, start_audio
 from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, DEFAULT_TYPE, TIME_TYPE, SHIELD_TYPE
 from dino_runner.components.dinosaur import Dinosaur
 from dino_runner.components.obstacles.obstacle_manager import ObstacleManager
 from dino_runner.components.power_ups.power_up_manager import PowerUpManager
 
 FONT_STYLE = "freesansbold.ttf"
+
+loop_music()
 
 class Game:
     def __init__(self):
@@ -34,7 +37,7 @@ class Game:
         while self.running:
             if not self.playing:
                 self.show_menu()
-        
+
         pygame.display.quit()
         pygame.quit()
 
@@ -48,8 +51,8 @@ class Game:
 
 
     def run(self):
-        # Game loop: events - update - draw
         self.playing = True
+        start_audio()
         while self.playing:
             self.power_up_manager.update(self)
             self.events()
@@ -83,10 +86,12 @@ class Game:
         self.score += 1
         if self.score % 10 == 0:
             self.game_speed += 0.1
-        if self.game_speed > 21:
+        if self.game_speed > 20.1:
             self.max_game_speed = self.game_speed
         if self.player.type == TIME_TYPE:
             self.game_speed = 20
+        if self.score % 1000 == 0:
+            score_reach_audio()
 
     def draw(self):
         self.clock.tick(FPS)

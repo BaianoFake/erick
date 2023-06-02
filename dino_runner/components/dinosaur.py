@@ -1,6 +1,7 @@
 import pygame
 from pygame.sprite import Sprite
 
+from dino_runner.components.audio import jump_audio
 from dino_runner.utils.constants import RUNNING, JUMPING, DUCKING, DEFAULT_TYPE, SHIELD_TYPE, HAMMER_TYPE, TIME_TYPE, DUCKING_SHIELD, JUMPING_SHIELD, RUNNING_SHIELD, DUCKING_HAMMER, JUMPING_HAMMER, RUNNING_HAMMER, SCREEN_WIDTH
 
 
@@ -54,6 +55,7 @@ class Dinosaur(Sprite):
             self.dino_jump = True
             self.dino_run = False
             self.dino_duck = False
+            jump_audio()
         elif (user_input[pygame.K_DOWN] or user_input[pygame.K_s]) and not self.dino_jump:
             self.dino_jump = False
             self.dino_run = False
